@@ -35,10 +35,10 @@ class BaseResource:
             except (ValueError, OverflowError, OSError):
                 return
         elif isinstance(value, numeric_types):
-                try:
-                    return datetime.datetime.utcfromtimestamp(value)
-                except (ValueError, OverflowError, OSError):
-                    return
+            try:
+                return datetime.datetime.utcfromtimestamp(value)
+            except (ValueError, OverflowError, OSError):
+                return
 
     def __repr__(self) -> str:
         return "<%s>" % self.__class__.__name__
