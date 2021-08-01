@@ -2,7 +2,7 @@ import functools
 import datetime
 from typing import Union, Optional
 
-from ..compat import basestring, integer_types, json, parse_datetime
+from ..compat import basestring, integer_types, numeric_types, json, parse_datetime
 
 
 class BaseResource:
@@ -34,6 +34,11 @@ class BaseResource:
                 return datetime.datetime.utcfromtimestamp(value / 1e3)
             except (ValueError, OverflowError, OSError):
                 return
+        elif isinstance(value, numeric_types):
+                try:
+                    return datetime.datetime.utcfromtimestamp(value)
+                except (ValueError, OverflowError, OSError):
+                    return
 
     def __repr__(self) -> str:
         return "<%s>" % self.__class__.__name__
